@@ -1,8 +1,10 @@
 import React from "react";
 
-export default function HelloWorld() {
+const HelloWorld:React.FC = () => {
 
   return (
     <h2>Hello world</h2>
   )
 }
+
+export default HelloWorld;
