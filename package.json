@@ -1,6 +1,6 @@
 {
   "name": "abirun",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Make smart contracts interation easy",
   "main": "index.js",
   "scripts": {
