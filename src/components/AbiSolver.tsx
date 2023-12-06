@@ -3,7 +3,7 @@ import ethers, { Interface } from "ethers";
 import axios from "axios";
 import { Button, Container, Form } from "react-bootstrap";
 
-const AbiSolver = (abiLink:string) => {
+const AbiSolver = (props) => {
   const [contractAddress,setContractAddress] = useState("");
   const [selectedABI,setSelectedABI] = useState("");
   const [params,setParams] = useState<any>([]);
@@ -13,7 +13,7 @@ const AbiSolver = (abiLink:string) => {
   
   useEffect(()=>{
     const loadContracts = async ()=>{
-      const reponse = await axios.get(abiLink)
+      const reponse = await axios.get(props.abiLink)
       const reponseData = reponse.data;
       setContracts(reponseData);
       setSelectedABI(Object.keys(reponseData)[0]);
