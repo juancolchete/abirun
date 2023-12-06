@@ -43,6 +43,8 @@
     "rollup": "^4.6.1",
     "rollup-plugin-peer-deps-external": "^2.2.4"
   },
-  "bin": "build/index.js",
+  "bin": {
+    "abirun": "build/index.js"
+  },
   "types": "build/index.d.ts"
 }
