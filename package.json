@@ -2,7 +2,7 @@
   "name": "abirun",
   "version": "0.0.12",
   "description": "Make smart contracts interation easy",
-  "main": "index.js",
+  "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx rollup -c"
