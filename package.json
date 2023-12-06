@@ -44,5 +44,5 @@
     "rollup-plugin-peer-deps-external": "^2.2.4"
   },
   "bin": "build/index.js",
-  "types": "build/index.d.ts",
+  "types": "build/index.d.ts"
 }
