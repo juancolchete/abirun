@@ -9,11 +9,11 @@ export default [
     input: './src/index.ts',
     output: [
       {
-        file: 'dist/index.js',
+        file: 'build/index.js',
         format: 'cjs',
       },
       {
-        file: 'dist/index.es.js',
+        file: 'build/index.es.js',
         format: 'es',
         exports: 'named',
       }
