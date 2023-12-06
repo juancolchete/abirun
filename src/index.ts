@@ -1,3 +1,1 @@
-import HelloWorld from './components/HelloWorld';
-
-export {HelloWorld};
+export * from "./components/abiSolver";
