@@ -28,6 +28,8 @@ const AbiSolver = (props) => {
         const selectedAddress = windowProp?.ethereum.selectedAddress;
         console.log("selected address: ", selectedAddress);
         setAddress(selectedAddress)
+      }else{
+        windowProp.ethereum.request({ method: 'eth_requestAccounts' });
       }
     }
   },[loaded])
