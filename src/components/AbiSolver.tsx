@@ -34,6 +34,17 @@ const AbiSolver = (props: any) => {
     }
   },[loaded])
 
+  const getInputs = (inputs: inputABI[])=>{
+    let inputTypes = "";
+    for(let i=0;i < inputs.length;i++){
+      inputTypes += inputs[i].type
+      if(i < inputs.length-1){
+        inputTypes += ","  
+      }
+    } 
+    return inputTypes;
+  }
+  
   const setInputs = async (name:string,index:number,value:any)=>{
     const paramsTemp = params
     for(let i=index;i <= params.length;i++){
@@ -106,8 +117,9 @@ const AbiSolver = (props: any) => {
       {loaded && address?.length > 0 && contracts[selectedABI].map((item:any)=>(
         item.type == "function" ?
         <>
-          { item.name != "safeTransferFrom" ?
-          <Button onClick={() => executeFunction(item.name)}>{item.name} {new Interface(contracts[selectedABI]).getFunction(item.name)?.selector}</Button>:<></>}
+          <Button onClick={() => executeFunction(item.name)}>{`${item.name} `} 
+            {new Interface(contracts[selectedABI]).getFunction(`${item.name}(${getInputs(item.inputs)})`)?.selector}
+          </Button>
           <br/>
           {item.inputs.map(
             (inputItem:any, index:any)=>(
