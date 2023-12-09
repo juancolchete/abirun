@@ -128,6 +128,17 @@ const AbiSolver = (props: any) => {
           )}
         </>:<></>
       ))}
+      {loaded && address?.length > 0 && contracts[selectedABI].map((item:any)=>(
+        item.type == "error" ?
+        <>
+          <h6>
+            {`${item.name} `}
+            {new Interface(contracts[selectedABI]).getError(`${item.name}(${getInputs(item.inputs)})`)?.selector}
+          </h6>
+          <br/>
+        </>:<></>
+      ))}
+
     </Container>
   )
 }
