@@ -3,7 +3,7 @@ import ethers, { Interface } from "ethers";
 import axios from "axios";
 import { Button, Container, Form } from "react-bootstrap";
 
-const AbiSolver = (props) => {
+const AbiSolver = (props: any) => {
   const [contractAddress,setContractAddress] = useState("");
   const [selectedABI,setSelectedABI] = useState("");
   const [params,setParams] = useState<any>([]);
@@ -106,7 +106,9 @@ const AbiSolver = (props) => {
       {loaded && address?.length > 0 && contracts[selectedABI].map((item:any)=>(
         item.type == "function" ?
         <>
-          <Button onClick={() => executeFunction(item.name)}>{item.name} {(new ethers.Interface(item)).getFunction(item.name).selector}</Button><br/>
+          { item.name != "safeTransferFrom" ?
+          <Button onClick={() => executeFunction(item.name)}>{item.name} {new Interface(contracts[selectedABI]).getFunction(item.name)?.selector}</Button>:<></>}
+          <br/>
           {item.inputs.map(
             (inputItem:any, index:any)=>(
               <Form.Control size="lg" type="text" key={index} placeholder={inputItem.name} onChange={(e)=>setInputs(item.name,index,e.target.value)}/>
@@ -119,3 +121,4 @@ const AbiSolver = (props) => {
 }
 
 export default AbiSolver;
+
