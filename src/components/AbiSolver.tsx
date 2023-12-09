@@ -8,18 +8,33 @@ const AbiSolver = (props: any) => {
   const [selectedABI,setSelectedABI] = useState("");
   const [params,setParams] = useState<any>([]);
   const [loaded,setLoaded] = useState<boolean>(false);
+  const [allowed,setAllowed] = useState<boolean>(false);
   const [contracts,setContracts] = useState<any>();
   const [address, setAddress] = useState("");
   
   useEffect(()=>{
-    const loadContracts = async ()=>{
+    const loadContracts = async ()=>{ 
       const reponse = await axios.get(props.abiLink)
       const reponseData = reponse.data;
       setContracts(reponseData);
       setSelectedABI(Object.keys(reponseData)[0]);
       setLoaded(true);
     }
-    if(loaded == false){
+    const getWhitelisted = async (address: string)=>{
+      if(props.whitelistEnabled == true){
+        const reponseWhitelist = await axios.get(props.whitelistLink)
+        const whitelistData = reponseWhitelist.data;
+        if(address?.length > 0 && whitelistData.toString().toLowerCase().indexOf(address.toLowerCase()) > -1){
+          console.log("was allowed")
+          setAllowed(true);
+        }else{
+          setAllowed(false);
+        }
+      }else{
+        setAllowed(true);
+      }
+    }
+    if(loaded == false && allowed == true){
       loadContracts();
     }
     const windowProp:any = window;
@@ -27,12 +42,13 @@ const AbiSolver = (props: any) => {
       if(windowProp?.ethereum.selectedAddress){
         const selectedAddress = windowProp?.ethereum.selectedAddress;
         console.log("selected address: ", selectedAddress);
-        setAddress(selectedAddress)
+        getWhitelisted(selectedAddress);
+        setAddress(selectedAddress);
       }else{
         windowProp.ethereum.request({ method: 'eth_requestAccounts' });
       }
     }
-  },[loaded])
+  },[loaded,allowed])
 
   const getInputs = (inputs: inputABI[])=>{
     let inputTypes = "";
@@ -107,16 +123,16 @@ const AbiSolver = (props: any) => {
           <h1>{contractAddress}</h1>
           <Form.Control size="lg" type="text" placeholder="contract" onChange={(e)=>setContractAddress(e.target.value)}/>
           <select onChange={(e)=>setSelectedABI(e.target.value)}>
-            {loaded && (Object.keys(contracts)as any).map((item:any)=>(
-              <option value={item} key={item} >{item}</option>
+            {loaded && (Object.keys(contracts)as any).map((item:any,index:number)=>(
+              <option value={item} key={index} >{item}</option>
             ))}
           </select>
         </> 
       )}
       <br/>
-      {loaded && address?.length > 0 && contracts[selectedABI].map((item:any)=>(
+      {loaded && address?.length > 0 && contracts[selectedABI].map((item:any,index:number)=>(
         item.type == "function" ?
-        <>
+        <span key={index}>
           <Button onClick={() => executeFunction(item.name)}>{`${item.name} `} 
             {new Interface(contracts[selectedABI]).getFunction(`${item.name}(${getInputs(item.inputs)})`)?.selector}
           </Button>
@@ -126,17 +142,15 @@ const AbiSolver = (props: any) => {
               <Form.Control size="lg" type="text" key={index} placeholder={inputItem.name} onChange={(e)=>setInputs(item.name,index,e.target.value)}/>
              )
           )}
-        </>:<></>
+        </span>:<span key={index}></span>
       ))}
-      {loaded && address?.length > 0 && contracts[selectedABI].map((item:any)=>(
+      {loaded && address?.length > 0 && contracts[selectedABI].map((item:any,index: number)=>(
         item.type == "error" ?
-        <>
-          <h6>
+          <h6 key={index}>
             {`${item.name} `}
             {new Interface(contracts[selectedABI]).getError(`${item.name}(${getInputs(item.inputs)})`)?.selector}
           </h6>
-          <br/>
-        </>:<></>
+          :<span key={index}></span>
       ))}
 
     </Container>
