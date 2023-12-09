@@ -106,7 +106,7 @@ const AbiSolver = (props) => {
       {loaded && address?.length > 0 && contracts[selectedABI].map((item:any)=>(
         item.type == "function" ?
         <>
-          <Button onClick={() => executeFunction(item.name)}>{item.name}</Button><br/>
+          <Button onClick={() => executeFunction(item.name)}>{item.name} {(new ethers.Interface(item)).getFunction(item.name).selector}</Button><br/>
           {item.inputs.map(
             (inputItem:any, index:any)=>(
               <Form.Control size="lg" type="text" key={index} placeholder={inputItem.name} onChange={(e)=>setInputs(item.name,index,e.target.value)}/>
