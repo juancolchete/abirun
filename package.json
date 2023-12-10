@@ -5,8 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npx rollup -c",
-    "publish": "npm version patch && npm publish"
+    "build": "npx rollup -c"
   },
   "repository": {
     "type": "git",
