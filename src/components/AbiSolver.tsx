@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import ethers, { Interface } from "ethers";
+import { ethers, Interface } from "ethers";
 import axios from "axios";
 import { Button, Container, Form } from "react-bootstrap";
 
 const AbiSolver = (props: any) => {
   const [contractAddress,setContractAddress] = useState("");
   const [selectedABI,setSelectedABI] = useState("");
-  const [params,setParams] = useState<any>([]);
+  const [params,setParams] = useState<any>({});
   const [loaded,setLoaded] = useState<boolean>(false);
   const [allowed,setAllowed] = useState<boolean>(false);
   const [contracts,setContracts] = useState<any>();
@@ -61,12 +61,15 @@ const AbiSolver = (props: any) => {
     return inputTypes;
   }
   
-  const setInputs = async (name:string,index:number,value:any)=>{
+  const setInputs = async (functionName:string,index:number,value:any)=>{
     const paramsTemp = params
-    for(let i=index;i <= params.length;i++){
-      paramsTemp.push()
+    if(paramsTemp[functionName] == null){
+      paramsTemp[functionName] = [];
+      for(let i=index;i <= params.length;i++){
+        paramsTemp[functionName].push()
+      }
     }
-    paramsTemp[index] = value;
+    paramsTemp[functionName][index] = value;
     setParams(paramsTemp)
   }
 
@@ -79,8 +82,8 @@ const AbiSolver = (props: any) => {
         const contract = new ethers.Contract(contractAddress,contracts[selectedABI],signer);
         console.log(`======${name}=======`)
         let response;
-        if(params.length > 0 && params[0].length>0){
-          response = await contract[name](...params);
+        if(params?.[name]?.length > 0 && params?.[name]?.[0]?.length>0){
+          response = await contract[name](...params[name]);
         }else{
           response = await contract[name]();
         }
