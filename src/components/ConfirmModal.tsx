@@ -6,10 +6,6 @@ const ConfirmModal = (props: any) => {
 
   return (
     <>
-      <Button variant="primary" onClick={props.handleShow()}>
-        Launch demo modal
-      </Button>
-
       <Modal show={props.show} onHide={props.handleClose()}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
