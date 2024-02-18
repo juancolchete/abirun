@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ethers, Interface } from "ethers";
 import axios from "axios";
 import { Button, Container, Form } from "react-bootstrap";
+import ConfirmModal from "./ConfirmModal";
 
 const AbiSolver = (props: any) => {
   const [contractAddress,setContractAddress] = useState("");
@@ -11,6 +12,7 @@ const AbiSolver = (props: any) => {
   const [allowed,setAllowed] = useState<boolean>(false);
   const [contracts,setContracts] = useState<any>();
   const [address, setAddress] = useState("");
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
   
   useEffect(()=>{
     const loadContracts = async ()=>{ 
@@ -75,6 +77,7 @@ const AbiSolver = (props: any) => {
 
   const executeFunction = async (name:string)=>{
     try{
+      setShowConfirmModal(true);
       const windowProp:any = window;
       if(windowProp?.ethereum){
         const provider = new ethers.BrowserProvider(windowProp.ethereum);
@@ -118,7 +121,17 @@ const AbiSolver = (props: any) => {
     }
   }
 
+  const handleClose = () =>{
+    setShowConfirmModal(false);
+  }
+
+  const handleShow = () =>{
+    setShowConfirmModal(true);
+  }
+
   return (
+    <>
+      <ConfirmModal show={showConfirmModal} handleClose={handleClose} handleShow={handleShow} />
     <Container className="col-sm">
       {address?.length > 0 &&(
         <>
@@ -157,6 +170,7 @@ const AbiSolver = (props: any) => {
       ))}
 
     </Container>
+    </>
   )
 }
 

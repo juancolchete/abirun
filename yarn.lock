@@ -682,7 +682,7 @@ __metadata:
     axios: ^1.6.2
     ethers: ^6.9.0
     react: ^18.2.0
-    react-bootstrap: ^2.9.1
+    react-bootstrap: ^2.10.1
     react-dom: ^18.2.0
     rollup: ^4.6.1
     rollup-plugin-babel: ^4.4.0
@@ -1938,9 +1938,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-bootstrap@npm:^2.9.1":
-  version: 2.9.1
-  resolution: "react-bootstrap@npm:2.9.1"
+"react-bootstrap@npm:^2.10.1":
+  version: 2.10.1
+  resolution: "react-bootstrap@npm:2.10.1"
   dependencies:
     "@babel/runtime": ^7.22.5
     "@restart/hooks": ^0.4.9
@@ -1961,7 +1961,7 @@ __metadata:
   peerDependenciesMeta:
     "@types/react":
       optional: true
-  checksum: 889de157ab782257a6496d37aebb578b13850caec41bdc068e68a2e1ff2af18740f0a388974850f59115a57fa34a2949a2803aaa79000498fef7d0b63b413706
+  checksum: ed330f27420a1df4fab1b4648173c49daa2d965bbf2b91994b88b5217bab357b812fff4c71ea32369b69e625eb7cb4b29ec364e5c3b8e5e2eb7e3ed365306f1d
   languageName: node
   linkType: hard
 
