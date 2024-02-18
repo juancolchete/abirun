@@ -13,6 +13,7 @@ const AbiSolver = (props: any) => {
   const [contracts,setContracts] = useState<any>();
   const [address, setAddress] = useState("");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [text, setText] = useState("");
   
   useEffect(()=>{
     const loadContracts = async ()=>{ 
@@ -77,7 +78,6 @@ const AbiSolver = (props: any) => {
 
   const executeFunction = async (name:string)=>{
     try{
-      handleShow();
       const windowProp:any = window;
       if(windowProp?.ethereum){
         const provider = new ethers.BrowserProvider(windowProp.ethereum);
@@ -85,12 +85,18 @@ const AbiSolver = (props: any) => {
         const contract = new ethers.Contract(contractAddress,contracts[selectedABI],signer);
         console.log(`======${name}=======`)
         let response;
+        const functionDetail = contracts[selectedABI].filter((e:any)=>{return e.name == name})[0];
+        const outputs = functionDetail.outputs;
+        console.log(contracts[selectedABI])
+        if(functionDetail.stateMutability.indexOf("payable") > -1){
+          setText(name)
+          handleShow();
+        }
         if(params?.[name]?.length > 0 && params?.[name]?.[0]?.length>0){
           response = await contract[name](...params[name]);
         }else{
           response = await contract[name]();
         }
-        const outputs = contracts[selectedABI].filter((e:any)=>{return e.name == name})[0].outputs;
         if(outputs.length > 1){
           for(let i=0;i < outputs.length;i++){
             if(outputs[i].type.indexOf("int") > -1){
@@ -131,7 +137,7 @@ const AbiSolver = (props: any) => {
 
   return (
     <>
-      <ConfirmModal show={showConfirmModal} handleClose={handleClose}   />
+      <ConfirmModal show={showConfirmModal} handleClose={handleClose} text={text}   />
     <Container className="col-sm">
       {address?.length > 0 &&(
         <>
