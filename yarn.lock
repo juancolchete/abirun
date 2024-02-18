@@ -682,7 +682,7 @@ __metadata:
     axios: ^1.6.2
     ethers: ^6.9.0
     react: ^18.2.0
-    react-bootstrap: ^2.10.1
+    react-bootstrap: ^2.9.1
     react-dom: ^18.2.0
     rollup: ^4.6.1
     rollup-plugin-babel: ^4.4.0
@@ -1938,7 +1938,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-bootstrap@npm:^2.10.1":
+"react-bootstrap@npm:^2.9.1":
   version: 2.10.1
   resolution: "react-bootstrap@npm:2.10.1"
   dependencies:
