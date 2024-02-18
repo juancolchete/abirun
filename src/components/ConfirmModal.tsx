@@ -12,10 +12,10 @@ const ConfirmModal = (props: any) => {
         </Modal.Header>
         <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={props.handleClose()}>
+          <Button variant="secondary" onClick={props?.handleClose()}>
             Close
           </Button>
-          <Button variant="primary" onClick={props.handleClose()}>
+          <Button variant="primary" onClick={props?.handleClose()}>
             Save Changes
           </Button>
         </Modal.Footer>
