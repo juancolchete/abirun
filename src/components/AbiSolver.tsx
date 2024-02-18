@@ -14,6 +14,7 @@ const AbiSolver = (props: any) => {
   const [address, setAddress] = useState("");
   const [showConfirmModal, setShowConfirmModal] = useState(false);
   const [text, setText] = useState("");
+  const [functionIputs,setFunctionInputs] = useState([]);
   
   useEffect(()=>{
     const loadContracts = async ()=>{ 
@@ -87,11 +88,13 @@ const AbiSolver = (props: any) => {
         let response;
         const functionDetail = contracts[selectedABI].filter((e:any)=>{return e.name == name})[0];
         const outputs = functionDetail.outputs;
+        setFunctionInputs(functionDetail.inputs)
         console.log(contracts[selectedABI])
         if(functionDetail.stateMutability.indexOf("payable") > -1){
           setText(name)
           handleShow();
         }
+        console.log(params)
         if(params?.[name]?.length > 0 && params?.[name]?.[0]?.length>0){
           response = await contract[name](...params[name]);
         }else{
@@ -137,7 +140,7 @@ const AbiSolver = (props: any) => {
 
   return (
     <>
-      <ConfirmModal show={showConfirmModal} handleClose={handleClose} text={text}   />
+      <ConfirmModal show={showConfirmModal} handleClose={handleClose} text={text} params={params} functionIputs={functionIputs}  />
     <Container className="col-sm">
       {address?.length > 0 &&(
         <>
