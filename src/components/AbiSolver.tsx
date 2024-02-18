@@ -174,5 +174,5 @@ const AbiSolver = (props: any) => {
   )
 }
 
-export default AbiSolver;
+export {AbiSolver};
 

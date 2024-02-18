@@ -1,4 +1,4 @@
-import AbiSolver from "./components/AbiSolver";
+import {AbiSolver} from "./components/AbiSolver";
 
 export {AbiSolver}
 
