@@ -24,4 +24,4 @@ const ConfirmModal = ({show, handleClose}) => {
   );
 }
 
-export default ConfirmModal;
+export {ConfirmModal};
