@@ -2,7 +2,11 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-const ConfirmModal = ({show, handleClose}:any) => {
+const ConfirmModal = ({show}:any) => {
+
+  const handleClose = ()=>{
+    console.log("close")
+  }
 
   return (
     <>
