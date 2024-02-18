@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx rollup -c",
-    "publish": "yarn build && npm version patch && npm publish"
+    "upload": "yarn build && npm version patch && npm publish"
   },
   "repository": {
     "type": "git",
