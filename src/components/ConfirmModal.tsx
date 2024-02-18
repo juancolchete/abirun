@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
-import {Modal,Button}  from 'react-bootstrap';
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const ConfirmModal = () => {
-  const [show, setShow] = useState(false);
+  const show = true;
+  const handleClose = ()=>{
+    console.log("close")
+  }
 
-  const handleClose = () => setShow(false);
   return (
     <>
       <Modal show={show} onHide={handleClose}>
