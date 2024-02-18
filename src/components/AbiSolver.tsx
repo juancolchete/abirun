@@ -131,7 +131,7 @@ const AbiSolver = (props: any) => {
 
   return (
     <>
-      <ConfirmModal   />
+      <ConfirmModal show={showConfirmModal} handleClose={handleClose}   />
     <Container className="col-sm">
       {address?.length > 0 &&(
         <>
