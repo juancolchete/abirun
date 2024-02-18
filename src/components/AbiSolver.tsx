@@ -77,7 +77,7 @@ const AbiSolver = (props: any) => {
 
   const executeFunction = async (name:string)=>{
     try{
-      setShowConfirmModal(true);
+      handleShow();
       const windowProp:any = window;
       if(windowProp?.ethereum){
         const provider = new ethers.BrowserProvider(windowProp.ethereum);
