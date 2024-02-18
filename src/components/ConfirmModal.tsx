@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 const ConfirmModal = () => {
-  const show = true;
-  const handleClose = ()=>{
-    console.log("close")
-  }
+  const [show, setShow] = useState(false);
 
+  const handleClose = () => setShow(false);
   return (
     <>
-      {/* <Modal show={show} onHide={handleClose}> */}
+      <Modal show={show} onHide={handleClose}>
       {/*   <Modal.Header closeButton> */}
       {/*     <Modal.Title>Modal heading</Modal.Title> */}
       {/*   </Modal.Header> */}
@@ -23,7 +21,7 @@ const ConfirmModal = () => {
       {/*       Save Changes */}
       {/*     </Button> */}
       {/*   </Modal.Footer> */}
-      {/* </Modal> */}
+      </Modal>
     </>
   );
 }
