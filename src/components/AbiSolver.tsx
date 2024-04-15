@@ -58,8 +58,18 @@ const AbiSolver = (props: any) => {
     let inputTypes = "";
     for(let i=0;i < inputs.length;i++){
       inputTypes += inputs[i].type
-      if(i < inputs.length-1){
+      if(i < inputs.length-1 && inputs[i]?.components?.length == null){
         inputTypes += ","  
+      }
+      if(inputs[i]?.components?.length > 0){
+        inputTypes += "("
+        for(let j=0; j < inputs[i].components.length; j++){
+          inputTypes += inputs[i].components[j].type
+          if(j < inputs[i].components.length-1){
+            inputTypes += ","  
+          }
+        }
+        inputTypes += "),"
       }
     } 
     return inputTypes;
