@@ -106,7 +106,9 @@ const AbiSolver = (props: any) => {
         }
         console.log(params)
         if(params?.[name]?.length > 0 && params?.[name]?.[0]?.length>0){
-          response = await contract[name](...params[name]);
+          console.log("params")
+          let funParams = [JSON.parse(params[name])]
+          response = await contract[name](...funParams);
         }else{
           response = await contract[name]();
         }
